@@ -2,11 +2,11 @@ import sqlite3
 from random import shuffle
 
 list_nb_bleues = list(range(1, 11))
-list_nb_vertes = list(range(10, 21))
-list_nb_oranges = list(range(20, 31))
-list_nb_violettes = list(range(30, 41))
-list_nb_roses = list(range(40, 51))
-list_nb_jaunes = list(range(50, 61))
+list_nb_vertes = list(range(11, 21))
+list_nb_oranges = list(range(21, 31))
+list_nb_violettes = list(range(31, 41))
+list_nb_roses = list(range(41, 51))
+list_nb_jaunes = list(range(51, 61))
 shuffle(list_nb_bleues)
 shuffle(list_nb_vertes)
 shuffle(list_nb_oranges)
@@ -89,4 +89,4 @@ def question(color):
         print("Dommage, ce n'est pas la bonne réponse !")
     conn.close()
 
-question("vertes")
+question("oranges")
