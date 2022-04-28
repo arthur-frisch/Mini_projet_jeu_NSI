@@ -1,5 +1,7 @@
 import sqlite3
 from random import shuffle
+import os
+from urllib import response
 
 list_nb_bleues = list(range(1, 11))
 list_nb_vertes = list(range(11, 21))
@@ -49,7 +51,6 @@ def comparaison_levenshtein(mot1, mot2):
 def question(color):
     conn = sqlite3.connect('database.db')
     c = conn.cursor()
-    global list_nb
     if color == "vertes":
         nb = list_nb_vertes[0]
         del(list_nb_vertes[0])
@@ -81,7 +82,7 @@ def question(color):
         request = c.execute(f"SELECT * FROM cartes WHERE id={nb} AND couleur='{color}'")
         
     request = request.fetchall()[0]
-    print(request[1])
+    print(request)
     entry = input("Quelle est ta réponse ? ")
     if comparaison_levenshtein(entry, request[2]) < 3:
         print("Bien joué, c'est la bonne réponse !")
@@ -89,4 +90,18 @@ def question(color):
         print("Dommage, ce n'est pas la bonne réponse !")
     conn.close()
 
-question("oranges")
+def affiche_carte(color, nb):
+    """_summary_
+
+    Args:
+        color (_type_): _description_
+    """
+    color = color.upper()
+    chemin = os.listdir(f"CARTES/CARTES {color}")
+    question=chemin[nb%10]
+    response=chemin[nb%10 + 10]
+    print(question)
+    print(response)
+
+question("vertes")
+affiche_carte("vertes", 19)
