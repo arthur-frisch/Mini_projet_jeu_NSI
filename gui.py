@@ -1,17 +1,36 @@
 import tkinter as tk
 from random import randint
 
-def nb_alea():
-    text.set("Nombre : " + str(randint(1,6)))
-    
 
-fenetre = tk.Tk()
-text = tk.StringVar()
-text.set("Test")
-textlabel = tk.Label(fenetre, textvariable=text)
-textlabel.pack()
-canvas = tk.Canvas(width=500, height=500)
-canvas.pack()
-bouton = tk.Button(fenetre, command=nb_alea, width=8, height=1, text="Tirage nb")
-bouton.pack()
-fenetre.mainloop()
+class fenetre:
+    def __init__(self):
+        self.window = tk.Tk()
+        self.window.title("Trivial Poursuit")
+        self.window.geometry("1100x900")
+        self.bg = Bg(self.window)
+        self.frame = Frame(self.window)
+        self.window.mainloop()
+
+class Button:
+    def __init__(self, window, _text : str, _command=None):
+        self.button = tk.Button(window, text=_text, fg="black", command=_command)
+        self.button.pack()
+
+        
+class Bg:
+    def __init__(self, frame):
+        self.bg = tk.PhotoImage(file="plateau.png")
+        self.label = tk.Label(frame, image=self.bg)
+        self.label.pack()
+        
+class Frame:
+    def __init__(self, window):
+        self.frame = tk.Frame(window)
+        self.frame.pack()
+        self.button = Button(self.frame, "Destruction", window.destroy)
+        
+    def test(self):
+        print("Test ")
+    
+        
+fenetre()
