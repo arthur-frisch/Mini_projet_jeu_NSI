@@ -1,20 +1,7 @@
 import sqlite3
 from random import shuffle
 import os
-from urllib import response
 
-list_nb_bleues = list(range(1, 11))
-list_nb_vertes = list(range(11, 21))
-list_nb_oranges = list(range(21, 31))
-list_nb_violettes = list(range(31, 41))
-list_nb_roses = list(range(41, 51))
-list_nb_jaunes = list(range(51, 61))
-shuffle(list_nb_bleues)
-shuffle(list_nb_vertes)
-shuffle(list_nb_oranges)
-shuffle(list_nb_violettes)
-shuffle(list_nb_roses)
-shuffle(list_nb_jaunes)
 
 class Camembert:
     def __init__(self):
@@ -49,6 +36,18 @@ def comparaison_levenshtein(mot1, mot2):
     return ligne_i[len(mot1)]
     
 def question(color):
+    list_nb_bleues = list(range(1, 11))
+    list_nb_vertes = list(range(11, 21))
+    list_nb_oranges = list(range(21, 31))
+    list_nb_violettes = list(range(31, 41))
+    list_nb_roses = list(range(41, 51))
+    list_nb_jaunes = list(range(51, 61))
+    shuffle(list_nb_bleues)
+    shuffle(list_nb_vertes)
+    shuffle(list_nb_oranges)
+    shuffle(list_nb_violettes)
+    shuffle(list_nb_roses)
+    shuffle(list_nb_jaunes)
     conn = sqlite3.connect('database.db')
     c = conn.cursor()
     if color == "vertes":
