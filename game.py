@@ -1,6 +1,6 @@
 import sqlite3
 from random import shuffle
-import os
+
 
 
 class Camembert:
@@ -14,7 +14,7 @@ class Camembert:
                 return False
         return True
 
-def comparaison_levenshtein(mot1, mot2):
+def comparaison_levenshtein(mot1 : str, mot2 : str):
     """_summary_
 
     Args:
@@ -89,18 +89,13 @@ def question(color):
         print("Dommage, ce n'est pas la bonne réponse !")
     conn.close()
 
-def affiche_carte(color, nb):
+def affiche_carte(color : str, nb : int):
     """_summary_
 
     Args:
         color (_type_): _description_
     """
     color = color.upper()
-    chemin = os.listdir(f"CARTES/CARTES {color}")
-    question=chemin[nb%10]
-    response=chemin[nb%10 + 10]
-    print(question)
-    print(response)
-
-question("vertes")
-affiche_carte("vertes", 19)
+    nb %= 10
+    question, reponse = f"CARTES/CARTES {color}/question_{nb}.png", f"CARTES/CARTES {color}/reponse_{nb}.png"
+    return (question, reponse)
