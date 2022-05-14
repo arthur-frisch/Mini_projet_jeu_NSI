@@ -1,7 +1,18 @@
 import sqlite3
 from random import shuffle
 
-
+list_nb_bleues = list(range(1, 11))
+list_nb_vertes = list(range(11, 21))
+list_nb_oranges = list(range(21, 31))
+list_nb_violettes = list(range(31, 41))
+list_nb_roses = list(range(41, 51))
+list_nb_jaunes = list(range(51, 61))
+shuffle(list_nb_bleues)
+shuffle(list_nb_vertes)
+shuffle(list_nb_oranges)
+shuffle(list_nb_violettes)
+shuffle(list_nb_roses)
+shuffle(list_nb_jaunes)
 
 class Camembert:
     def __init__(self):
@@ -35,19 +46,7 @@ def comparaison_levenshtein(mot1 : str, mot2 : str):
             ligne_i[k] = min(ligne_i[k-1] + 1, ligne_prec[k] + 1, ligne_prec[k-1] + cout)
     return ligne_i[len(mot1)]
     
-def question(color):
-    list_nb_bleues = list(range(1, 11))
-    list_nb_vertes = list(range(11, 21))
-    list_nb_oranges = list(range(21, 31))
-    list_nb_violettes = list(range(31, 41))
-    list_nb_roses = list(range(41, 51))
-    list_nb_jaunes = list(range(51, 61))
-    shuffle(list_nb_bleues)
-    shuffle(list_nb_vertes)
-    shuffle(list_nb_oranges)
-    shuffle(list_nb_violettes)
-    shuffle(list_nb_roses)
-    shuffle(list_nb_jaunes)
+def question(color : str):
     conn = sqlite3.connect('database.db')
     c = conn.cursor()
     if color == "vertes":
@@ -81,13 +80,8 @@ def question(color):
         request = c.execute(f"SELECT * FROM cartes WHERE id={nb} AND couleur='{color}'")
         
     request = request.fetchall()[0]
-    print(request)
-    entry = input("Quelle est ta réponse ? ")
-    if comparaison_levenshtein(entry, request[2]) < 3:
-        print("Bien joué, c'est la bonne réponse !")
-    else:
-        print("Dommage, ce n'est pas la bonne réponse !")
     conn.close()
+    return (request[2], nb)
 
 def affiche_carte(color : str, nb : int):
     """_summary_
